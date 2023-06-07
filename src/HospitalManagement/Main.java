@@ -91,10 +91,8 @@ public class Main {
                     } else {
                         System.out.println("Failed to load file");
                     }
-
                     break;
                 case 10:
-
                     do {
                         System.out.print("Are you sure to quite this program(y/n): ");
                         confirmation = box.nextLine().toLowerCase();

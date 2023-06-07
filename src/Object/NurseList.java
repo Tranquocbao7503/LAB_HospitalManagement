@@ -180,10 +180,10 @@ public class NurseList extends HashMap<String, Nurse> implements Serializable {
     }
 
     public NurseList filterAvailableNurses(NurseList nurseList, NurseList nurseAvailableList) {
-        System.out.println("Hello");
+       
         for (Nurse nurse : nurseList.values()) {
             if (nurse.getAssignedPatientList() == null || nurse.getAssignedPatientList().size() <= 1) {
-                System.out.println("Hello");
+               
                 nurseAvailableList.put(nurse.getId(), nurse);
             }
         }

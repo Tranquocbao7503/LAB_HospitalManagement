@@ -187,6 +187,7 @@ public class PatientList extends HashMap<String, Patient> implements Serializabl
             } else if (listAvailableNurse.checkNurseExist(idFirstNurse)) {
                 patientAdd.assignedNurseList.put(idFirstNurse, listAvailableNurse.get(idFirstNurse));
                 listAvailableNurse.get(idFirstNurse).assignedPatientList.put(newPatientID, this.get(newPatientID));
+                listAvailableNurse.remove(idFirstNurse);
             }
         } while (!idFirstNurse.trim().matches(formatNurseID));
 
@@ -199,10 +200,18 @@ public class PatientList extends HashMap<String, Patient> implements Serializabl
                 System.out.println("Try again!");
 
             } else if (listAvailableNurse.checkNurseExist(idSecondNurse)) {
-                patientAdd.assignedNurseList.put(idSecondNurse, listAvailableNurse.get(idSecondNurse));
-                listAvailableNurse.get(idSecondNurse).assignedPatientList.put(newPatientID, this.get(newPatientID));
+
+                if (idFirstNurse.equalsIgnoreCase(idSecondNurse)) {
+                    System.out.println("First Nurse ID cannot be Second Nurse ID");
+                    System.out.println("Try again");
+                } else {
+
+                    patientAdd.assignedNurseList.put(idSecondNurse, listAvailableNurse.get(idSecondNurse));
+                    listAvailableNurse.get(idSecondNurse).assignedPatientList.put(newPatientID, this.get(newPatientID));
+                    listAvailableNurse.remove(idSecondNurse);
+                }
             }
-        } while (!idSecondNurse.trim().matches(formatNurseID));
+        } while (!idSecondNurse.trim().matches(formatNurseID) || (idFirstNurse.equalsIgnoreCase(idSecondNurse)));
 
         this.put(newPatientID, patientAdd);
         System.out.println("Adding successfully!!");
